@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+require "#{ENV['TM_BUNDLE_SUPPORT']}/ri_cal"
+
+components = RiCal.parse(STDIN)
+components.each do |calendar|
+  puts "&lt;h1&gt;Calendar&lt;/h1&gt;"
+  
+  if !calendar.events.empty?
+      calendar.events.each do |event|
+        puts "&lt;h2&gt;#{event.summary}&lt;/h2&gt;"
+        puts "&lt;em&gt;#{event.start_time} to #{event.finish_time}&lt;/em&gt;"
+        if event.description
+          puts "&lt;p&gt;#{event.description.gsub("\n","&lt;br&gt;")}&lt;/p&gt;"
+        end
+      end
+  end
+end
+</string>
+	<key>input</key>
+	<string>document</string>
+	<key>inputFormat</key>
+	<string>text</string>
+	<key>keyEquivalent</key>
+	<string>^~@p</string>
+	<key>name</key>
+	<string>Preview</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>newWindow</string>
+	<key>scope</key>
+	<string>source.icalendar</string>
+	<key>uuid</key>
+	<string>CC9E7E1B-A5F3-414A-AB6F-CC2F4B4D0C75</string>
+	<key>version</key>
+	<integer>2</integer>
+</dict>
+</plist>
